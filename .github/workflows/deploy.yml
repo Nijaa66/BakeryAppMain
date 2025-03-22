@@ -1,0 +1,36 @@
+name: Sync to Bakery Repos
+
+on:
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  sync-repos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout bakerymain
+        uses: actions/checkout@v3
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Push changes to mdsbakery
+        run: |
+          git remote add mdsbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/Mdsbakery.git || true
+          git push mdsbakery main
+
+       - name: Push changes to tejusbakery
+        run: |
+          git remote add tejusbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/TejusBakery.git || true
+          git push tejusbakery main
+
+
+
+
+
+
+
+
+
