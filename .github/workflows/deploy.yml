@@ -1,7 +1,7 @@
 name: Sync to Bakery Repos
 
 on:
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   sync-repos:
@@ -18,13 +18,20 @@ jobs:
 
       - name: Push changes to mdsbakery
         run: |
-          git remote add mdsbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/Mdsbakery.git || true
+          git remote add mdsbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/Mdsbakery.git
+          git fetch mdsbakery
           git push mdsbakery main
 
-       - name: Push changes to tejusbakery
+      - name: Push changes to tejusbakery
         run: |
-          git remote add tejusbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/TejusBakery.git || true
+          git remote add tejusbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/TejusBakery.git
+          git fetch tejusbakery
           git push tejusbakery main
+
+
+
+
+
 
 
 
