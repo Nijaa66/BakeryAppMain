@@ -1,4 +1,4 @@
-name: Sync to Bakery Repos
+name: Sync to Bakery Repos
 
 on:
   workflow_dispatch: # Manual trigger
@@ -18,23 +18,23 @@ jobs:
 
       - name: Authenticate with PAT
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/BakeryAppMain.git
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN  }}@github.com/Nijaa66/BakeryAppMain.git
           git fetch --unshallow || true
 
       - name: Debug GitHub Authentication
         run: |
           echo "Testing authentication..."
-          git clone https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/Mdsbakery.git test_clone
+          git clone https://x-access-token:${{ secrets.GH_PAT  }}@github.com/Nijaa66/Mdsbakery.git test_clone
           echo "✅ Authentication successful!"
 
       - name: Push changes to mdsbakery
         run: |
-          git remote add mdsbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/Mdsbakery.git || true
+          git remote add mdsbakery https://x-access-token:${{ secrets.GH_PAT  }}@github.com/Nijaa66/Mdsbakery.git || true
           git push mdsbakery main --force
 
       - name: Push changes to tejusbakery
         run: |
-          git remote add tejusbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/TejusBakery.git || true
+          git remote add tejusbakery https://x-access-token:${{ secrets.GH_PAT  }}@github.com/Nijaa66/TejusBakery.git || true
           git push tejusbakery main --force
 
 
