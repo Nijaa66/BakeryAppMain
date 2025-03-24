@@ -1,7 +1,7 @@
 name: Sync to Bakery Repos
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Manual trigger
 
 jobs:
   sync-repos:
@@ -11,28 +11,24 @@ jobs:
       - name: Checkout bakerymain
         uses: actions/checkout@v3
 
-      - name: Set up SSH Key
+      - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-      - name: Set up Git user
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
+      - name: Authenticate with SSH
+        run: ssh -T git@github.com
 
       - name: Push changes to mdsbakery  
         run: |
           git remote remove mdsbakery || true
           git remote add mdsbakery git@github.com:Nijaa66/Mdsbakery.git
-          git push mdsbakery main --force
+          git push --force mdsbakery main
 
       - name: Push changes to tejusbakery
         run: |
           git remote remove tejusbakery || true
           git remote add tejusbakery git@github.com:Nijaa66/TejusBakery.git
-          git push tejusbakery main --force
+          git push --force tejusbakery main
