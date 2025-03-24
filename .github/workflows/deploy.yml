@@ -1,7 +1,7 @@
 name: Sync to Bakery Repos
 
 on:
-  workflow_dispatch: # Manual trigger
+  workflow_dispatch:
 
 jobs:
   sync-repos:
@@ -16,6 +16,8 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Set up Git user
