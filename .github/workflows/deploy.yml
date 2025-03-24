@@ -19,9 +19,9 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Authenticate with SSH
-        run: ssh -T git@github.com
+        run: ssh -T git@github.com || true  # ✅ FIXED
 
-      - name: Push changes to mdsbakery  
+      - name: Push changes to mdsbakery
         run: |
           git remote remove mdsbakery || true
           git remote add mdsbakery git@github.com:Nijaa66/Mdsbakery.git
