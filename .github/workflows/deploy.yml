@@ -11,22 +11,26 @@ jobs:
       - name: Checkout bakerymain
         uses: actions/checkout@v3
 
+      - name: Set up SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Set up Git user
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
 
-      - name: Authenticate with PAT
+      - name: Push changes to mdsbakery  
         run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/BakeryAppMain.git
-          git fetch --unshallow || true
-
-      - name: Push changes to mdsbakery
-        run: |
-          git remote add mdsbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/Mdsbakery.git || true
+          git remote remove mdsbakery || true
+          git remote add mdsbakery git@github.com:Nijaa66/Mdsbakery.git
           git push mdsbakery main --force
 
       - name: Push changes to tejusbakery
         run: |
-          git remote add tejusbakery https://x-access-token:${{ secrets.GH_PAT }}@github.com/Nijaa66/TejusBakery.git || true
+          git remote remove tejusbakery || true
+          git remote add tejusbakery git@github.com:Nijaa66/TejusBakery.git
           git push tejusbakery main --force
