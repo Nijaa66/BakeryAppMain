@@ -1,0 +1,31 @@
+name: hello world workflow
+	on:
+		push:
+			branches:
+				-main
+		pullrequest:
+			branches:
+				-main
+		workflow_dispatch:
+		
+	jobs:
+		helloworld:
+			runs-on:ubuntu-latest
+			steps:
+				-uses:actions/checkout@v2
+			name:Hello World
+			run:echo "Hi this is first yml file by Nijaa"
+			shell:bash
+		job2:
+			
+			runs-on:ubuntu-latest
+	                	steps:
+                                	-uses:actions/checkout@v2
+        		name:my Second job
+                        run:echo " this is my second by Nijaa"
+                        shell:bash
+
+			
+	
+
+				
