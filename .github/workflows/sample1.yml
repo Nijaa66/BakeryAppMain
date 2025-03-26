@@ -1,4 +1,4 @@
-name: Create a Comment on Issue
+name: "Create a Comment on Issue"
 
 on:
   issues:
@@ -8,7 +8,7 @@ run-name: "Issue Comment Job by Nijaa"
 
 jobs:
   comment-on-issue:
-    name: Issue Comment Job  # This will be displayed in workflow runs
+    name: "Issue Comment Job"  # This will be displayed in workflow runs
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub Context
@@ -24,5 +24,4 @@ jobs:
             - With GitHub **Markdown** ✨
             - Created by [create-or-update-comment][1]
           reactions: '+1'
-
 		
