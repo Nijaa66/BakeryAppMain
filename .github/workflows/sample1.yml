@@ -1,14 +1,14 @@
-name: create a comment on issue
+name: Create a Comment on Issue
 
 on:
   issues:
-    types: [opened]  # Fixed typo and added space
+    types: [opened]
 
 jobs:
   comment-on-issue:
-    name:default-name
+    name: Issue Comment Job  # This will be displayed in workflow runs
     runs-on: ubuntu-latest
     steps:
       - name: Dump GitHub Context
-        run: echo '${{ toJSON(github.event) }}' | jq  # Fixed syntax
+        run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
