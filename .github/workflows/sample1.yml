@@ -1,15 +1,13 @@
-name: create a comment on issue 
+name: create a comment on issue
 
 on:
   issues:
-    types:[opend]  
+    types: [opened]  # Fixed typo and added space
 
 jobs:
   comment-on-issue:
     runs-on: ubuntu-latest
     steps:
-      - name: dump-github-context
-        run:echo'${{to JSON(hithub.event)}}' | jq 
+      - name: Dump GitHub Context
+        run: echo '${{ toJSON(github.event) }}' | jq  # Fixed syntax
         shell: bash
-
- 
