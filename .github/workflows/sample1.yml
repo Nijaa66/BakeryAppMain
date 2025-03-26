@@ -20,7 +20,7 @@ jobs:
         run: echo "Hi, this is the first YAML file by Nijaa"
         shell: bash
 
-  job2:
+  mysecondjob:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
