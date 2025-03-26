@@ -4,6 +4,8 @@ on:
   issues:
     types: [opened]
 
+run-name: "Issue Comment Job by Nijaa"
+
 jobs:
   comment-on-issue:
     name: Issue Comment Job  # This will be displayed in workflow runs
@@ -12,3 +14,15 @@ jobs:
       - name: Dump GitHub Context
         run: echo '${{ toJSON(github.event) }}' | jq
         shell: bash
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** ✨
+            - Created by [create-or-update-comment][1]
+          reactions: '+1'
+
+		
