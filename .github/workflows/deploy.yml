@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout bakerymain (Full Clone)  # ✅ FIXED
+      - name: Checkout bakerymain (Full Clone)  
         uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Ensures full history
@@ -21,7 +21,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
 
       - name: Authenticate with SSH
-        run: ssh -T git@github.com || true  # ✅ Prevents failure
+        run: ssh -T git@github.com || true  
 
       - name: Push changes to mdsbakery
         run: |
